@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio – Muhammad Ali Syaafiq</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0D1B2A;
+      --navy-mid: #1B2D42;
+      --navy-soft: #253347;
+      --cream: #F5F0E8;
+      --cream-dark: #EAE3D4;
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --white: #FFFFFF;
+      --text-muted: #8A9BB0;
+      --accent-line: rgba(201,168,76,0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--cream);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 5vw;
+      background: rgba(13,27,42,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--accent-line);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 5vw;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-lines {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(201,168,76,0.25) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse 60% 80% at 80% 50%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 80% at 80% 50%, black 30%, transparent 100%);
+    }
+    .hero-bg-lines::before { content: none; }
+    .hero-bg-lines::after { content: none; }
+    .hero-content { max-width: 700px; position: relative; }
+    .hero-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-label::before {
+      content: '';
+      display: block;
+      width: 32px; height: 0.5px;
+      background: var(--gold);
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    h1 span { color: var(--gold); font-style: italic; }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.75rem 1.75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .btn-primary:hover { background: var(--gold-light); }
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      border: 0.5px solid rgba(245,240,232,0.3);
+    }
+    .btn-outline:hover { border-color: var(--cream); }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 5vw; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px; height: 0.5px;
+      background: var(--gold);
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .section-divider {
+      border: none;
+      border-top: 0.5px solid var(--accent-line);
+      margin: 0 5vw;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--navy-mid); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+    .about-text p strong { color: var(--cream); font-weight: 500; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--navy-soft);
+      border: 0.5px solid rgba(201,168,76,0.15);
+      border-radius: 2px;
+      padding: 1.25rem;
+    }
+    .skill-card-icon {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .skill-card h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 0.35rem;
+    }
+    .skill-card p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--navy); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .project-card {
+      background: var(--navy-mid);
+      border: 0.5px solid rgba(201,168,76,0.15);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover {
+      border-color: rgba(201,168,76,0.5);
+      transform: translateY(-4px);
+    }
+    .project-img {
+      width: 100%; height: 180px;
+      background: var(--navy-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      border-bottom: 0.5px solid rgba(201,168,76,0.1);
+    }
+    .project-body { padding: 1.5rem; }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      background: rgba(201,168,76,0.12);
+      color: var(--gold);
+      border-radius: 2px;
+    }
+    .project-body h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .project-body p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .project-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 0.7rem; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy-mid); text-align: center; }
+    #contact h2 { margin-bottom: 0.75rem; }
+    #contact .section-label { justify-content: center; }
+    #contact .section-label::before { display: none; }
+    .contact-desc {
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      font-size: 1rem;
+    }
+    .contact-links {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      padding: 0.6rem 1.25rem;
+      border: 0.5px solid rgba(138,155,176,0.3);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .contact-item:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem 5vw;
+      border-top: 0.5px solid var(--accent-line);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 700px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    /* ── FADE IN ── */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Muhammad Ali Syaafiq</a>
+  <ul class="nav-links">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#projects">Proyek</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-content">
+    <p class="hero-label fade-in">Web Developer &amp; IoT Enthusiast</p>
+    <h1 class="fade-in">Halo, saya <span>Muhammad Ali Syaafiq</span></h1>
+    <p class="hero-desc fade-in">
+      Fresh graduate yang gemar membangun hal-hal dari nol — website, sistem IoT, hingga
+      solusi kecil yang berguna sehari-hari. Selalu belajar, selalu penasaran.
+    </p>
+    <div class="hero-cta fade-in">
+      <a href="#projects" class="btn btn-primary">Lihat Proyek</a>
+      <a href="#contact" class="btn btn-outline">Kontak Saya</a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label fade-in">Tentang Saya</div>
+  <h2 class="fade-in">Latar Belakang &amp; Keahlian</h2>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>
+        Saya adalah seorang <strong>fresh graduate</strong> yang antusias di bidang
+        teknologi, khususnya pengembangan web dan sistem IoT berbasis Arduino/ESP32.
+      </p>
+      <p>
+        Saya percaya bahwa teknologi yang baik adalah teknologi yang
+        <strong>memecahkan masalah nyata</strong> — baik itu website untuk UMKM
+        lokal maupun sistem monitoring untuk kebutuhan sehari-hari.
+      </p>
+      <p>
+        Saat ini saya terbuka untuk proyek freelance, kolaborasi, maupun
+        kesempatan belajar bersama.
+      </p>
+    </div>
+    <div class="skills-grid fade-in">
+      <div class="skill-card">
+        <div class="skill-card-icon">🌐</div>
+        <h4>Web Development</h4>
+        <p>HTML, CSS, JavaScript — membangun website yang responsif dan fungsional tanpa framework.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🔌</div>
+        <h4>IoT / Arduino</h4>
+        <p>ESP32, NodeMCU, sensor suhu &amp; kelembaban, sistem monitoring realtime.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">💡</div>
+        <h4>Problem Solving</h4>
+        <p>Merancang solusi sederhana untuk masalah teknis yang nyata di sekitar kita.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">📄</div>
+        <h4>Dokumentasi</h4>
+        <p>Penulisan teknis yang jelas — README, skema wiring, writeup proyek.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label fade-in">Portofolio</div>
+  <h2 class="fade-in">Proyek yang Pernah Dibuat</h2>
+  <div class="projects-grid">
+
+    <!-- Project 1 -->
+    <div class="project-card fade-in">
+      <div class="project-img">🌱</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag">IoT</span>
+          <span class="tag">NodeMCU</span>
+          <span class="tag">Arduino</span>
+        </div>
+        <h3>Smart Plant Monitor</h3>
+        <p>
+          Sistem monitoring tanaman berbasis NodeMCU Lolin V3 yang menampilkan
+          data suhu, kelembaban tanah, dan status penyiraman secara realtime di LCD.
+        </p>
+        <a href="#" class="project-link">Lihat di GitHub →</a>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card fade-in">
+      <div class="project-img">🖥️</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag">Web</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+        <h3>Website Portofolio</h3>
+        <p>
+          Website portofolio pribadi ini — dibangun dari nol menggunakan HTML,
+          CSS murni, dan JavaScript tanpa framework.
+        </p>
+        <a href="#" class="project-link">Lihat Source Code →</a>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card fade-in">
+      <div class="project-img">🚀</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag">Coming Soon</span>
+        </div>
+        <h3>Proyek Berikutnya</h3>
+        <p>
+          Selalu ada hal baru yang sedang dikerjakan. Pantau terus GitHub saya
+          untuk update terbaru!
+        </p>
+        <a href="#contact" class="project-link">Diskusi Ide →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label fade-in">Kontak</div>
+  <h2 class="fade-in">Ngobrol Yuk</h2>
+  <p class="contact-desc fade-in">
+    Mau diskusi proyek, kolaborasi, atau sekadar ngobrol soal teknologi?
+    Jangan sungkan untuk reach out!
+  </p>
+  <div class="contact-links fade-in">
+    <a href="mailto:alisyaafiq6@gmail.com" class="contact-item">✉ alisyaafiq6@gmail.com</a>
+    <a href="https://github.com/" class="contact-item">⌥ GitHub (segera hadir)</a>
+    <a href="https://linkedin.com/" class="contact-item">in LinkedIn (segera hadir)</a>
+    <a href="https://wa.me/6289603334296" class="contact-item">💬 WhatsApp</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Muhammad Ali Syaafiq.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
